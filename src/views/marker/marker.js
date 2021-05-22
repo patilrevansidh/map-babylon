@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { GoogleMap, withScriptjs, withGoogleMap, Rectangle } from 'react-google-maps';
 import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
-
+import { withRouter } from 'react-router-dom';
 
 const RECTANGLE_BOUNDS = {
   north: 38.685,
@@ -12,7 +12,8 @@ const RECTANGLE_BOUNDS = {
   west: -118.251,
 }
 
-// const map_key = 'AIzaSyD8HUHf6nimAnL3r5BOyqqm65GdoLGZWRk';
+const defaultZoom  = 10;
+
 const map_key = 'AIzaSyBD8ln3PzLS0Sm45BPADpTWJ2Xzrw_Qzqs'
 
 
@@ -39,7 +40,7 @@ class Marker extends React.Component {
   handleDrawingLister = (rectangle) => {
     console.log('rectangle', rectangle)
     const { bounds, map } = rectangle;
-    const zoom = map.bounds || 10
+    const zoom = map.bounds || defaultZoom
     // const { bounds } = this.state;
     var centre = bounds.getCenter(); //rectangle is the shape drawn on the map
     // var spherical = google.maps.geometry.spherical;
@@ -54,8 +55,8 @@ class Marker extends React.Component {
     var imgUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" +
       centre.lat() + "," + centre.lng() + "&zoom=" + zoom +
       "&size=" + width + "x" + height + "&maptype=roadmap&key=" + map_key;
-
-    this.setState({ imgUrl })
+    console.log('* imgUrl *',imgUrl)
+    this.props.history.push('/babylonjs', { imgUrl })
   }
 
   getCurrentLatLong() {
@@ -132,4 +133,4 @@ class Marker extends React.Component {
   }
 }
 
-export default Marker
+export default withRouter(Marker);

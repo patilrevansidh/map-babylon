@@ -14,7 +14,7 @@ const RECTANGLE_BOUNDS = {
 
 const defaultZoom  = 10;
 
-const map_key = 'AIzaSyBD8ln3PzLS0Sm45BPADpTWJ2Xzrw_Qzqs'
+const map_key = '** google Key **'
 
 
 class Marker extends React.Component {
